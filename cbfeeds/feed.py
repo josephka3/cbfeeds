@@ -147,9 +147,9 @@ class CbFeedInfo(object):
 
         # all fields in feedinfo must be strings
         for key in list(self.data.keys()):
-            if not (isinstance(self.data[key], str) or isinstance(self.data[key], str)):
+            if not (isinstance(self.data[key], str)):
                 raise CbInvalidFeed("FeedInfo field %s must be of type %s, the field \
-                                    %s is of type %s " % (key, "unicode", key, type(self.data[key])))
+                                    %s is of type %s " % (key, "str", key, type(self.data[key])))
 
         # certain fields, when present, must not be empty strings
         for key in list(self.data.keys()):
