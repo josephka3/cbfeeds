@@ -8,6 +8,10 @@ from cbfeeds import CbInvalidReport
 from cbfeeds import CbIconError
 from cbfeeds import CbInvalidFeed
 
+try: unicode
+except:
+    unicode = type("")
+
 
 class CbJSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -147,9 +151,9 @@ class CbFeedInfo(object):
 
         # all fields in feedinfo must be strings
         for key in list(self.data.keys()):
-            if not (isinstance(self.data[key], str)):
+            if not (isinstance(self.data[key], str)) and not(isinstance(self.data[key],unicode)):
                 raise CbInvalidFeed("FeedInfo field %s must be of type %s, the field \
-                                    %s is of type %s " % (key, "str", key, type(self.data[key])))
+                                    %s is of type %s " % (key, "str/unicode", key, type(self.data[key])))
 
         # certain fields, when present, must not be empty strings
         for key in list(self.data.keys()):
